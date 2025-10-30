@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Mãos Solidárias</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e74c3c;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(52, 152, 219, 0.9), rgba(41, 128, 185, 0.9)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e74c3c;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-section h3::before {
+            content: "•";
+            color: #e74c3c;
+            font-size: 1.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .checkbox-item:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+        }
+
+        .checkbox-item input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #3498db;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2980b9;
+        }
+
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        .form-note {
+            background: #e8f4fc;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        /* Seção de Doações */
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .donation-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-3px);
+            border-color: #3498db;
+        }
+
+        .donation-card.selected {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .donation-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .donation-description {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        .custom-donation {
+            background: #fff;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .custom-amount {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .custom-amount input {
+            width: 150px;
+            padding: 0.75rem;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .donation-type {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .donation-type-option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .donation-type-option:hover {
+            border-color: #3498db;
+        }
+
+        .donation-type-option.selected {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e74c3c;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #e74c3c;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #34495e;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #28a745;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.75rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .donation-options {
+                grid-template-columns: 1fr;
+            }
+
+            .donation-type {
+                grid-template-columns: 1fr;
+            }
+
+            .custom-amount {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div style="width: 40px; height: 40px; background: #e74c3c; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; font-weight: bold;">MS</div>
+                    Mãos Solidárias
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="projetos.html">Projetos Sociais</a></li>
+                        <li><a href="cadastro.html">Cadastro</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Cadastro de Voluntário</h1>
+            <p>Junte-se à nossa rede de transformação social e faça a diferença</p>
+        </section>
+
+        <section class="content-section">
+            <div class="form-note">
+                <p><strong>Importante:</strong> Todos os campos marcados com * são obrigatórios. Seus dados estão protegidos e serão usados apenas para fins de voluntariado.</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                Cadastro enviado com sucesso! Entraremos em contato em breve. Obrigado por se juntar à nossa causa!
+            </div>
+
+            <form id="cadastroForm">
+                <div class="form-section">
+                    <h3>Dados Pessoais</h3>
+                    
+                    <div class="form-group">
+                        <label for="nome" class="required">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="required">E-mail</label>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone" class="required">Telefone</label>
+                            <input type="text" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cpf" class="required">CPF</label>
+                            <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nascimento" class="required">Data de Nascimento</label>
+                            <input type="date" id="nascimento" name="nascimento" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Endereço</h3>
+                    
+                    <div class="form-group">
+                        <label for="endereco" class="required">Endereço Completo</label>
+                        <input type="text" id="endereco" name="endereco" required placeholder="Rua, número, complemento">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cep" class="required">CEP</label>
+                            <input type="text" id="cep" name="cep" required placeholder="00000-000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cidade" class="required">Cidade</label>
+                            <input type="text" id="cidade" name="cidade" required placeholder="Sua cidade">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="estado" class="required">Estado</label>
+                            <select id="estado" name="estado" required>
+                                <option value="">Selecione seu estado...</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" name="bairro" placeholder="Seu bairro">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Áreas de Interesse</h3>
+                    <p>Selecione as áreas em que você gostaria de atuar como voluntário:</p>
+                    
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="area1" name="areas" value="atendimento">
+                            <label for="area1">Atendimento Comunitário</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="area2" name="areas" value="educacao">
+                            <label for="area2">Educação</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="area3" name="areas" value="saude">
+                            <label for="area3">Saúde</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="area4" name="areas" value="administrativo">
+                            <label for="area4">Apoio Administrativo</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="area5" name="areas" value="eventos">
+                            <label for="area5">Organização de Eventos</label>
+                        </div>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="area6" name="areas" value="comunicacao">
+                            <label for="area6">Comunicação e Marketing</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Disponibilidade</h3>
+                    
+                    <div class="form-group">
+                        <label for="disponibilidade" class="required">Quantas horas por semana você pode dedicar?</label>
+                        <select id="disponibilidade" name="disponibilidade" required>
+                            <option value="">Selecione sua disponibilidade...</option>
+                            <option value="2-4">2 a 4 horas</option>
+                            <option value="4-8">4 a 8 horas</option>
+                            <option value="8-12">8 a 12 horas</option>
+                            <option value="12+">Mais de 12 horas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dias" class="required">Quais dias da semana você tem disponibilidade?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="segunda" name="dias" value="segunda">
+                                <label for="segunda">Segunda-feira</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="terca" name="dias" value="terca">
+                                <label for="terca">Terça-feira</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="quarta" name="dias" value="quarta">
+                                <label for="quarta">Quarta-feira</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="quinta" name="dias" value="quinta">
+                                <label for="quinta">Quinta-feira</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sexta" name="dias" value="sexta">
+                                <label for="sexta">Sexta-feira</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sabado" name="dias" value="sabado">
+                                <label for="sabado">Sábado</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="domingo" name="dias" value="domingo">
+                                <label for="domingo">Domingo</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOVA SEÇÃO: DOAÇÕES -->
+                <div class="form-section">
+                    <h3>Deseja Fazer uma Doação?</h3>
+                    <p>Além do voluntariado, você pode contribuir financeiramente com nossos projetos:</p>
+                    
+                    <div class="form-group">
+                        <label>Selecione o tipo de doação:</label>
+                        <div class="donation-type">
+                            <div class="donation-type-option" data-type="unica">
+                                <strong>Doação Única</strong>
+                                <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 0.5rem;">Contribuição pontual</div>
+                            </div>
+                            <div class="donation-type-option" data-type="mensal">
+                                <strong>Doação Mensal</strong>
+                                <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 0.5rem;">Contribuição recorrente</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="donationAmountSection">
+                        <label>Selecione o valor da doação:</label>
+                        <div class="donation-options">
+                            <div class="donation-card" data-amount="50">
+                                <div class="donation-amount">R$ 50</div>
+                                <div class="donation-description">Alimenta 1 criança por 2 semanas</div>
+                            </div>
+                            
+                            <div class="donation-card" data-amount="200">
+                                <div class="donation-amount">R$ 200</div>
+                                <div class="donation-description">Material escolar para 5 crianças</div>
+                            </div>
+                            
+                            <div class="donation-card" data-amount="500">
+                                <div class="donation-amount">R$ 500</div>
+                                <div class="donation-description">Custea um curso profissionalizante</div>
+                            </div>
+                            
+                            <div class="donation-card" data-amount="1000">
+                                <div class="donation-amount">R$ 1.000</div>
+                                <div class="donation-description">Mantém um projeto por 1 mês</div>
+                            </div>
+                        </div>
+
+                        <div class="custom-donation">
+                            <p><strong>Ou digite outro valor:</strong></p>
+                            <div class="custom-amount">
+                                <span>R$</span>
+                                <input type="number" id="customAmount" placeholder="Digite o valor" min="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empresa">É uma doação corporativa?</label>
+                        <select id="empresa" name="empresa">
+                            <option value="">Não, é uma doação pessoal</option>
+                            <option value="basico">Sim - Empresarial Básico (R$ 5.000/ano)</option>
+                            <option value="nacional">Sim - Filantropia Nacional (R$ 50.000/ano)</option>
+                            <option value="internacional">Sim - Filantropia Internacional (R$ 200.000/ano)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formaPagamento">Forma de Pagamento Preferida:</label>
+                        <select id="formaPagamento" name="formaPagamento">
+                            <option value="">Selecione...</option>
+                            <option value="pix">PIX</option>
+                            <option value="cartao">Cartão de Crédito</option>
+                            <option value="boleto">Boleto</option>
+                            <option value="transferencia">Transferência Bancária</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Observações</h3>
+                    
+                    <div class="form-group">
+                        <label for="observacoes">Alguma observação, habilidade especial ou experiência relevante que gostaria de compartilhar?</label>
+                        <textarea id="observacoes" name="observacoes" rows="4" placeholder="Conte-nos sobre suas habilidades, experiências anteriores com voluntariado, ou qualquer informação que considere relevante..."></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Enviar Cadastro e Doação</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@maossolidarias.org</p>
+                    <p>Telefone: (11) 3456-7890</p>
+                    <p>Endereço: Rua das Flores, 123 - Centro, São Paulo - SP</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Página Inicial</a></li>
+                        <li><a href="projetos.html">Nossos Projetos</a></li>
+                        <li><a href="cadastro.html">Torne-se Voluntário</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Mãos Solidárias - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('cadastroForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Variáveis para doação
+            let selectedDonationType = '';
+            let selectedDonationAmount = 0;
+            let isCorporateDonation = false;
+
+            // Máscara para CPF
+            const cpfInput = document.getElementById('cpf');
+            cpfInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.substring(0, 11);
+                
+                if (value.length <= 11) {
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Máscara para telefone
+            const telefoneInput = document.getElementById('telefone');
+            telefoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.substring(0, 11);
+                
+                if (value.length <= 10) {
+                    value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                    value = value.replace(/(\d{4})(\d)/, '$1-$2');
+                } else if (value.length === 11) {
+                    value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                    value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Máscara para CEP
+            const cepInput = document.getElementById('cep');
+            cepInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 8) value = value.substring(0, 8);
+                
+                if (value.length > 5) {
+                    value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                }
+                
+                e.target.value = value;
+            });
+
+            // Seleção de tipo de doação
+            document.querySelectorAll('.donation-type-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.donation-type-option').forEach(o => {
+                        o.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedDonationType = this.getAttribute('data-type');
+                });
+            });
+
+            // Seleção de valor de doação
+            document.querySelectorAll('.donation-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.donation-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedDonationAmount = parseInt(this.getAttribute('data-amount'));
+                    document.getElementById('customAmount').value = '';
+                });
+            });
+
+            // Doação personalizada
+            document.getElementById('customAmount').addEventListener('input', function(e) {
+                if (this.value && this.value > 0) {
+                    selectedDonationAmount = parseInt(this.value);
+                    document.querySelectorAll('.donation-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                }
+            });
+
+            // Verificar se é doação corporativa
+            document.getElementById('empresa').addEventListener('change', function(e) {
+                isCorporateDonation = this.value !== '';
+                if (isCorporateDonation) {
+                    selectedDonationAmount = 0; // Reset do valor individual
+                    document.querySelectorAll('.donation-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    document.getElementById('customAmount').value = '';
+                }
+            });
+            
+            // Validação do formulário
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Verificar se pelo menos uma área de interesse foi selecionada
+                const areas = document.querySelectorAll('input[name="areas"]:checked');
+                if (areas.length === 0) {
+                    alert('Por favor, selecione pelo menos uma área de interesse.');
+                    return;
+                }
+                
+                // Verificar se pelo menos um dia da semana foi selecionado
+                const dias = document.querySelectorAll('input[name="dias"]:checked');
+                if (dias.length === 0) {
+                    alert('Por favor, selecione pelo menos um dia da semana disponível.');
+                    return;
+                }
+
+                // Processar informações de doação
+                let donationMessage = '';
+                if (selectedDonationType || selectedDonationAmount > 0 || isCorporateDonation) {
+                    donationMessage = '\n\nINFORMAÇÕES DE DOAÇÃO:';
+                    
+                    if (isCorporateDonation) {
+                        const corporateType = document.getElementById('empresa').value;
+                        const corporateNames = {
+                            'basico': 'Empresarial Básico (R$ 5.000/ano)',
+                            'nacional': 'Filantropia Nacional (R$ 50.000/ano)',
+                            'internacional': 'Filantropia Internacional (R$ 200.000/ano)'
+                        };
+                        donationMessage += `\n• Doação Corporativa: ${corporateNames[corporateType]}`;
+                    } else if (selectedDonationAmount > 0) {
+                        const donationType = selectedDonationType === 'mensal' ? 'Mensal' : 'Única';
+                        donationMessage += `\n• Doação ${donationType}: R$ ${selectedDonationAmount}`;
+                    }
+                    
+                    const paymentMethod = document.getElementById('formaPagamento').value;
+                    if (paymentMethod) {
+                        const paymentNames = {
+                            'pix': 'PIX',
+                            'cartao': 'Cartão de Crédito',
+                            'boleto': 'Boleto',
+                            'transferencia': 'Transferência Bancária'
+                        };
+                        donationMessage += `\n• Forma de Pagamento: ${paymentNames[paymentMethod]}`;
+                    }
+                }
+                
+                // Se todas as validações passarem
+                successMessage.style.display = 'block';
+                successMessage.innerHTML = `Cadastro enviado com sucesso!${donationMessage ? donationMessage : ''}\n\nEntraremos em contato em breve. Obrigado por se juntar à nossa causa!`;
+                
+                form.reset();
+                
+                // Reset das variáveis de doação
+                selectedDonationType = '';
+                selectedDonationAmount = 0;
+                isCorporateDonation = false;
+                document.querySelectorAll('.donation-type-option, .donation-card').forEach(el => {
+                    el.classList.remove('selected');
+                });
+
+                // Rolar para o topo para mostrar a mensagem de sucesso
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

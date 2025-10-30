@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mãos Solidárias - Transformando Vidas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e74c3c;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: #2c3e50;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+
+        .projects-preview {
+            background: #f8f9fa;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e74c3c;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #e74c3c;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div style="width: 40px; height: 40px; background: #e74c3c; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; font-weight: bold;">MS</div>
+                    Mãos Solidárias
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="projetos.html">Projetos Sociais</a></li>
+                        <li><a href="cadastro.html">Cadastro</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Transformando Vidas com Solidariedade</h1>
+            <p>Junte-se a nós na missão de construir um mundo mais justo e igualitário. Sua ajuda pode fazer a diferença na vida de milhares de pessoas.</p>
+            <div>
+                <a href="cadastro.html" class="btn">Quero Ajudar</a>
+                <a href="projetos.html" class="btn btn-secondary">Conhecer Projetos</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Como Fazemos a Diferença</h2>
+                <p>Nossas iniciativas são focadas em quatro pilares fundamentais para transformação social</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Alimentação</h3>
+                    <p>Distribuição de cestas básicas e refeições nutritivas para famílias em situação de vulnerabilidade alimentar.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Educação</h3>
+                    <p>Apoio escolar, reforço educacional e oficinas de leitura para crianças e adolescentes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Capacitação</h3>
+                    <p>Cursos profissionalizantes gratuitos para jovens e adultos em busca de oportunidades no mercado de trabalho.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Saúde</h3>
+                    <p>Atendimento básico de saúde e campanhas de prevenção em comunidades carentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Voluntários Ativos</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50.000+</h3>
+                    <p>Vidas Impactadas</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Comunidades Atendidas</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5</h3>
+                    <p>Anos de Atuação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section projects-preview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Projetos</h2>
+                <p>Conheça algumas das nossas principais iniciativas em andamento</p>
+            </div>
+            <div class="project-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Alimentando o Futuro" class="project-image">
+                    <div class="project-content">
+                        <h3>Alimentando o Futuro</h3>
+                        <p>Distribuição mensal de cestas básicas para mais de 2.000 famílias em situação de insegurança alimentar.</p>
+                        <a href="projetos.html" class="btn">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Educação para Todos" class="project-image">
+                    <div class="project-content">
+                        <h3>Educação para Todos</h3>
+                        <p>Apoio escolar e reforço educacional beneficiando mais de 500 crianças e adolescentes.</p>
+                        <a href="projetos.html" class="btn">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Profissão do Amanhã" class="project-image">
+                    <div class="project-content">
+                        <h3>Profissão do Amanhã</h3>
+                        <p>Cursos profissionalizantes que já formaram mais de 1.200 profissionais.</p>
+                        <a href="projetos.html" class="btn">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="projetos.html" class="btn">Ver Todos os Projetos</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Junte-se a Nós</h2>
+            <p>Sua contribuição, seja como voluntário ou doador, é fundamental para continuarmos transformando vidas. Faça parte dessa rede de solidariedade!</p>
+            <div>
+                <a href="cadastro.html" class="btn">Seja Voluntário</a>
+                <a href="projetos.html#doacao" class="btn btn-secondary">Fazer Doação</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@maossolidarias.org</p>
+                    <p>Telefone: (11) 3456-7890</p>
+                    <p>Endereço: Rua das Flores, 123 - Centro, São Paulo - SP</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Página Inicial</a></li>
+                        <li><a href="projetos.html">Nossos Projetos</a></li>
+                        <li><a href="cadastro.html">Torne-se Voluntário</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Mãos Solidárias - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
