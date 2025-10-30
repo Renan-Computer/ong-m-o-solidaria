@@ -9,7 +9,7 @@
 
 ## 🌟 Demonstração
 
-**🔗 Acesse a aplicação:** [https://seu-usuario.github.io/maos-solidarias](https://seu-usuario.github.io/maos-solidarias)
+**🔗 Acesse a aplicação:** https://renan-computer.github.io/ong-m-o-solidaria/
 
 ## ✨ Características Principais
 
@@ -64,3 +64,4 @@ npm run build
 
 # Execute os testes de acessibilidade
 npm run test:accessibility
+
